@@ -38,7 +38,8 @@
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.EventActivity" />
         <activity android:name=".activity.EventNewActivity" />
-        <activity android:name=".activity.RegisterActivity"></activity>
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.FindPsw"></activity>
     </application>
 
 </manifest>
