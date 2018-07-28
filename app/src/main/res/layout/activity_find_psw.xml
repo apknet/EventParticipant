@@ -86,18 +86,6 @@
             android:textSize="14sp" />
 
 
-        <Button
-            android:id="@+id/nextstep"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="35dp"
-            android:layout_marginRight="35dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/shape"
-            android:text="下一步"
-            android:textColor="@android:color/white"
-            android:textSize="13sp" />
 
     </LinearLayout>
 </LinearLayout>

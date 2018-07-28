@@ -2,6 +2,7 @@ package com.ep.eventparticipant.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,12 +25,15 @@ public class FindPsw extends AppCompatActivity {
     private Button btn_getcode;
     private EditText edit_password;
     private VerifyCodeManager codeManager;
+    private TextView tv_back,tv_tourist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_psw);
-
+        getWindow().setStatusBarColor(Color.WHITE);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        codeManager = new VerifyCodeManager(this, edit_code, btn_nextstep);
         init();
     }
 
@@ -38,16 +42,33 @@ public class FindPsw extends AppCompatActivity {
         edit_code = findViewById(R.id.edit_code);
         edit_phone_num = findViewById(R.id.et_phone_num);
         btn_getcode = findViewById(R.id.get_verificationcode);
+
        edit_password=findViewById(R.id.edit_psw);
-        btn_nextstep = findViewById(R.id.nextstep);
+
+        tv_back=findViewById(R.id.tv_back);
+        tv_tourist=findViewById(R.id.tourist);
+        tv_tourist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(FindPsw.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        tv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               FindPsw.this.finish();
+            }
+        });
+      /*  btn_nextstep = findViewById(R.id.nextstep);
         btn_nextstep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(FindPsw.this,LoginActivity.class);
                 startActivity(intent);
             }
-        });
-        // getVerifiCodeButton = getView(R.id.btn_send_verifi_code);
+        });*/
+       // getVerifiCodeButton = getView(R.id.btn_send_verifi_code);
         //  getVerifiCodeButton.setOnClickListener(this);
         //phoneEdit = getView(R.id.et_phone);
         edit_phone_num.setImeOptions(EditorInfo.IME_ACTION_NEXT);// 下一步
@@ -70,6 +91,8 @@ public class FindPsw extends AppCompatActivity {
         });
 
     }
+
+
 
     private void commit() {
         String phone = edit_phone_num.getText().toString().trim();
