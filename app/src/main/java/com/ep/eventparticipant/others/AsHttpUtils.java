@@ -88,7 +88,7 @@ public class AsHttpUtils {
                 .build();
         try {
             Response response = client.newCall(request).execute();
-            int code = new JSONObject(response.body().toString()).getInt("status");
+            int code = new JSONObject(response.body().string()).getInt("status");
             return code;
         } catch (Exception e) {
             e.printStackTrace();

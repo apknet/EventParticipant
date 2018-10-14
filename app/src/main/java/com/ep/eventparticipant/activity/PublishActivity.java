@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.ep.eventparticipant.R;
 import com.ep.eventparticipant.others.AsHttpUtils;
 
@@ -29,6 +31,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -48,6 +51,7 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
     public static OkHttpClient client;
     private File tempFile;
     private static final String PHOTO_FILE_NAME = "temp_photo.jpg";
+    private Uri uri=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +100,9 @@ finish();
             case R.id.camera:
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 //Intent intent=new Intent("android.media.action.IMAGE_CAPTURE");
+//                uri=FileProvider.getUriForFile(getApplicationContext(),"net.csdn.blog.ruancoder.fileprovider",createFile());
+//                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                intent.putExtra(MediaStore.ACTION_IMAGE_CAPTURE,uri);
                 a = 1;
               startActivityForResult(intent, 0);
                 break;
@@ -106,9 +113,13 @@ finish();
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0) {
+            Bundle bundle=data.getExtras();
             bitmap = data.getParcelableExtra("data");
             camera.setPadding(5, 5, 5, 5);
-            camera.setImageBitmap(bitmap);
+            //uri=Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),bitmap,null,null));
+           // Glide.with(this).load(uri).into(camera);
+           camera.setImageBitmap(bitmap);
+
 
 
 
@@ -129,7 +140,10 @@ finish();
 
     /*----------------------------*/
 
-
+static public File createFile(){
+    File file=new File(Environment.getExternalStorageDirectory()+"/"+new Random().nextInt()+".jpg");
+    return file;
+}
 
 
 
