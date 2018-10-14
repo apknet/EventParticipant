@@ -18,12 +18,13 @@ import com.ep.eventparticipant.adapter.AllAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllFragment extends Fragment {
+public class PhoneFragment extends Fragment {
     public static List<All_item> all_items=new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_all,container,false);
+        all_items.clear();
         initAll();
         RecyclerView recyclerView=view.findViewById(R.id.all_recyclerview);
         StaggeredGridLayoutManager layoutManager=new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
@@ -32,7 +33,7 @@ public class AllFragment extends Fragment {
         recyclerView.setAdapter(allAdapter);
         return  view;
     }
-    private void initAll(){
+    public static void initAll(){
 
             All_item all_item=new All_item("小米",R.drawable.phone);
             all_items.add(all_item);
